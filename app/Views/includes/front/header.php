@@ -19,13 +19,10 @@
     <meta property="og:url" content="" />
     <meta property="og:description" content="" />
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
-    <link href="<?php echo base_url(); ?>assets/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" /> -->
-    <!--theme-style-->
-    <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/lib/bootstrap-3/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- <link href="<?php echo base_url(); ?>assets/front/css/recharge.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo base_url(); ?>assets/front/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" /> -->
     <!--//theme-style-->
