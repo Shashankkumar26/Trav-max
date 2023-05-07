@@ -31,6 +31,9 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'CustomerFront::index');
 
+$routes->get('services', 'Page::services');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

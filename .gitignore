@@ -18,3 +18,6 @@ application/logs/*
 /vendor/
 *.DS_Store
 app/Config/App.php
+writable/session
+writable/debugbar
+writable/logs

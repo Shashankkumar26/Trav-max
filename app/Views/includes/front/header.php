@@ -36,59 +36,10 @@
 
 <body>
     <header id="header">
-        <!--header-->
-        <!--<div class="header_top">
-			<div class="container-fluid">
-				<div class="ht">
-					<div class="col-sm-6 ss">
-						<div class="social-icons">
-							<ul class="nav nav-pills">
-								<li><a href="merchants/admin"><i class="fa fa-users"></i>  Merchants Login/Signup</a></li>
-								
-								
-								
-							</ul>
-						</div>
-					</div>
-								<div class="col-sm-6 ssp">
-						<div class="social-icons">
-							<ul class="nav navbar-nav nav-pills">
-							 <?php //if ($this->session->userdata('is_customer_logged_in')) { ?>
-								
-								<li class="dropdown"><a href="JavaScript:Void(0);"><i class="fa fa-user"></i>  Welcome <?php //echo ucfirst($this->session->userdata('full_name')); ?><i class="fa fa-angle-down"></i></a>
-								 <ul role="menu" class="sub-menu">
-                                        <li><a href="<?php echo base_url(); ?>admin">Account</a></li>
-										<li><a href="<?php echo base_url(); ?>admin/profile">Profile</a></li> 
-										<li><a href="#">Wishzon Card-Purchase</a></li>
-										<li><a href="<?php echo base_url(); ?>logout">Logout</a></li>
-                                </ul>
-								
-								
-								</li>
-								
-								
-								<?php //} else { ?>
-								<li style="display:none;"><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Account</a></li>
-								<?php //} ?>
-								
-								
-								
-								<?php // if ($this->session->userdata('is_customer_logged_in')) { ?>
-								<li><a href="<?php echo base_url(); ?>logout"><i class="fa fa-lock"></i> Logout</a></li
-								<?php // } else { ?>
-								<li><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Customer Login/Signup</a></li>
-								<?php // } ?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>--><!--/header_top-->
-
-        <div class="header-middle"><!--header-middle-->
+        <div class="header-middle">
             <div class="">
                 <div class="row">
-                    <div class="col-md-2"><a href="<?php echo base_url(); ?>"><img class="img-responsive chain" src="/images/logo.png" alt=" "></a>
+                    <div class="col-md-2"><a href="/"><img class="img-responsive chain" src="/images/logo.png" alt=" "></a>
                     </div>
                     <div class="col-md-10 col-xs-12 mennuu">
                         <div class="menu-bar">
@@ -105,7 +56,7 @@
                                 <div id="navbar" class="navbar-collapse collapse">
                                     <ul class="nav navbar-nav">
                                         <li><a href="<?php echo base_url(); ?>"> Home </a></li>
-                                        <li class="active"><a href="<?php echo base_url(); ?>services">Services </a></li>
+                                        <li><a href="/services">Services </a></li>
                                         <li><a href="<?php echo base_url(); ?>packages">Packages </a></li>
                                         <li><a href="<?php echo base_url(); ?>regis">Register </a></li>
                                         <li><a href="<?php echo base_url(); ?>about">About </a></li>
@@ -150,24 +101,28 @@
 
 
                                     <ul class="nav navbar-nav navbar-right ">
-                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { ?>
+                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { 
+                                        ?>
 
-                                            <li class="nav-item dropdown social-icons">
-                                                <a class="nav-link dropdown-toggle" href="JavaScript:Void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-user"></i> Hi, <?php //echo ucfirst($this->session->userdata('efull_name')); ?><i class="fa fa-angle-down"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>
-                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin/profile">Profile</a>
-                                                    <a class="dropdown-item" href="https://www.travmaxholidays.com/invite_friend/<?php //echo ucfirst($this->session->userdata('bliss_id')); ?>">Refer and Earn</a>
-                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
-                                                </div>
-                                            </li>
+                                        <li class="nav-item dropdown social-icons">
+                                            <a class="nav-link dropdown-toggle" href="JavaScript:Void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i> Hi, <?php //echo ucfirst($this->session->userdata('efull_name')); 
+                                                                                ?><i class="fa fa-angle-down"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>
+                                                <a class="dropdown-item" href="<?php echo base_url(); ?>admin/profile">Profile</a>
+                                                <a class="dropdown-item" href="https://www.travmaxholidays.com/invite_friend/<?php //echo ucfirst($this->session->userdata('bliss_id')); 
+                                                                                                                                ?>">Refer and Earn</a>
+                                                <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
+                                            </div>
+                                        </li>
 
 
 
 
-                                            <!--<li class="dropdown"><a href="JavaScript:Void(0);"><i class="fa fa-user"></i>  Welcome <?php //echo ucfirst($this->session->userdata('full_name')); ?><i class="fa fa-angle-down"></i></a>
+                                        <!--<li class="dropdown"><a href="JavaScript:Void(0);"><i class="fa fa-user"></i>  Welcome <?php //echo ucfirst($this->session->userdata('full_name')); 
+                                                                                                                                    ?><i class="fa fa-angle-down"></i></a>
 								 <ul role="menu" class="sub-menu">
                                         <li><a href="<?php echo base_url(); ?>admin">Account</a></li>
 										<li><a href="<?php echo base_url(); ?>admin/profile">Profile</a></li> 
@@ -179,24 +134,28 @@
 								</li>-->
 
 
-                                        <?php //} else { ?>
-                                            <li style="display:none;"><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Account</a></li>
-                                        <?php //} ?>
+                                        <?php //} else { 
+                                        ?>
+                                        <li style="display:none;"><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Account</a></li>
+                                        <?php //} 
+                                        ?>
 
 
 
-                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { ?>
-                                            <!--li><a href="<?php echo base_url(); ?>logout"><i class="fa fa-lock"></i> Logout</a></li-->
-                                        <?php //} else { ?>
-                                            <li class="drop-nav">
-                                                <a id="login_btn" title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-sign-in"></i> Login</a>
-                                            </li>
+                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { 
+                                        ?>
+                                        <!--li><a href="<?php echo base_url(); ?>logout"><i class="fa fa-lock"></i> Logout</a></li-->
+                                        <?php //} else { 
+                                        ?>
+                                        <li class="drop-nav">
+                                            <a id="login_btn" title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-sign-in"></i> Login</a>
+                                        </li>
 
 
 
 
 
-                                            <!---	 <li class="nav-item dropdown">
+                                        <!---	 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           More <i class="fa fa-angle-down"></i>
         </a>
@@ -205,7 +164,7 @@
           
         </div>  
       </li>  --->
-                                            <!--<li class="dropdown">
+                                        <!--<li class="dropdown">
 								<a href="#">More<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 									<li><a href="">Sell on Wishzon</a></li>
@@ -214,7 +173,8 @@
                                 </li> -->
 
 
-                                        <?php //} ?>
+                                        <?php //} 
+                                        ?>
                                     </ul>
                                 </div><!--/.nav-collapse -->
                             </nav>
