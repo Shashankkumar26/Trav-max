@@ -19,15 +19,9 @@
     <meta property="og:url" content="" />
     <meta property="og:description" content="" />
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
     <link href="/lib/bootstrap-3/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
-    <!-- <link href="<?php echo base_url(); ?>assets/front/css/recharge.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="<?php echo base_url(); ?>assets/front/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" /> -->
-    <!--//theme-style-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <!-- <script type="application/x-javascript">
+    <script type="application/x-javascript">
         addEventListener("load", function() {
             setTimeout(hideURLbar, 0);
         }, false);
@@ -35,22 +29,12 @@
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
-    </script> -->
-    <!--fonts-->
-    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> -->
-    <!--//fonts-->
-    <!-- <script src="<?php echo base_url(); ?>assets/front/js/jquery-1.11.1.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/front/js/bootstrap.js"></script>
+    </script>
+    <script src="/lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="/lib/bootstrap-3/bootstrap.min.js"></script>
+</head>
 
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet"> -->
-</head><!--/head-->
-
-<body <?php if ($page_slug != '') {
-            echo 'class="' . $page_slug . '"';
-        } ?>>
+<body>
     <header id="header">
         <!--header-->
         <!--<div class="header_top">
@@ -104,7 +88,7 @@
         <div class="header-middle"><!--header-middle-->
             <div class="">
                 <div class="row">
-                    <div class="col-md-2"><a href="<?php echo base_url(); ?>"><img class="img-responsive chain" src="<?php echo base_url(); ?>assets/front/images/logo.png" alt=" "></a>
+                    <div class="col-md-2"><a href="<?php echo base_url(); ?>"><img class="img-responsive chain" src="/images/logo.png" alt=" "></a>
                     </div>
                     <div class="col-md-10 col-xs-12 mennuu">
                         <div class="menu-bar">
