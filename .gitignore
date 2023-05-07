@@ -17,3 +17,4 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 *.DS_Store
+app/Config/App.php

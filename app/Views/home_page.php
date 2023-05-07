@@ -6,7 +6,7 @@
                 <div class="row">
                     <h2 class="text-center nao-just-custmore">Holidays are now Affordable & Profitable </h2>
                     <div class="inner-images">
-                        <img src="/assets/images/WhatsAp.jpg" class="img-responsive">
+                        <img src="/images/WhatsAp.jpg" class="img-responsive">
                     </div>
                     <h2 class="text-center nao-just-custmore">Travel the World without Spending the World</h2>
                     <h3 class="text-justify zoogol-partene">We all have an intrinsic need and desire to travel the world, to see new and to explore new. The modern term for this exploration is Tourism. We travel to newer destinations to find joy, relaxation, to acquire knowledge and sometimes to discover our own selves. While we all wish to travel but we all can’t afford to travel frequently as International Travel is expensive. Travmax steps in here to solve that problem by initiating travel ideas that make the whole process exciting, affordable, profitable and simple.</h3>
