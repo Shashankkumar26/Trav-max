@@ -32,7 +32,8 @@ $routes->set404Override();
 $routes->get('/', 'CustomerFront::index');
 
 $routes->get('services', 'Page::services');
-
+$routes->get('packages', 'Page::packages');
+$routes->get('regis', 'Page::regis');
 
 /*
  * --------------------------------------------------------------------
