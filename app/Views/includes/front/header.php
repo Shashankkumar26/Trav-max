@@ -1,3 +1,4 @@
+<?php $session = session(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,154 +70,43 @@
                                                 <li><a href="contact_us">Contact</a></li>
                                             </ul>
                                         </li>
-
-                                        <!--	 <li><a href="<?php echo base_url(); ?>deals">Hot Deals</a></li>
-							 
-							
-				
-								<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category<i class="fa fa-angle-down"></i></a>
-                                    <ul  class="dropdown-menu">
-									
-									<?php if (isset($category_list) && (!empty($category_list))) {
-
-                                        foreach ($category_list as $category) {
-                                            echo '<li><a href="' . base_url() . 'category/' . str_replace(' ', '-', $category['c_name']) . '" >' . $category['c_name'] . '</a></li>';
-                                        }
-                                    } ?>			
-
-			 
-                                    </ul>
-                                </li> 
-								<li><a href="<?php echo base_url(); ?>offline_stores">Near by Store</a></li>
-								<li><a href="<?php echo base_url(); ?>buy_privilege_card">Buy Privilege Card</a></li>-->
-                                        <!----li><a href="<?php echo base_url(); ?>why_to_zoogol">WHY TO TRAVELMAX <span class="border-nav">|</span></a></li-->
-
-
-                                        <!---li><a href="/how_to_start">HOW TO START</a></li--->
-
-                                        <!--	<li><a href="/genratelink">Generate Cashback Link</a></li>   --->
-                                        <!---li class="d-flex-more"><a href="<?php echo base_url(); ?>#">MORE WITH TRAVELMAX <i class="fa fa-sort-desc" aria-hidden="true"></i></a></li--->
                                     </ul>
 
 
                                     <ul class="nav navbar-nav navbar-right ">
-                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { 
+                                        <?php if ($session->has('is_customer_logged_in')) {
                                         ?>
 
-                                        <li class="nav-item dropdown social-icons">
-                                            <a class="nav-link dropdown-toggle" href="JavaScript:Void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fa fa-user"></i> Hi, <?php //echo ucfirst($this->session->userdata('efull_name')); 
-                                                                                ?><i class="fa fa-angle-down"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>
-                                                <a class="dropdown-item" href="<?php echo base_url(); ?>admin/profile">Profile</a>
-                                                <a class="dropdown-item" href="https://www.travmaxholidays.com/invite_friend/<?php //echo ucfirst($this->session->userdata('bliss_id')); 
-                                                                                                                                ?>">Refer and Earn</a>
-                                                <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
-                                            </div>
-                                        </li>
-
-
-
-
-                                        <!--<li class="dropdown"><a href="JavaScript:Void(0);"><i class="fa fa-user"></i>  Welcome <?php //echo ucfirst($this->session->userdata('full_name')); 
-                                                                                                                                    ?><i class="fa fa-angle-down"></i></a>
-								 <ul role="menu" class="sub-menu">
-                                        <li><a href="<?php echo base_url(); ?>admin">Account</a></li>
-										<li><a href="<?php echo base_url(); ?>admin/profile">Profile</a></li> 
-										<li><a href="#">Wishzon Card-Purchase</a></li>
-										<li><a href="<?php echo base_url(); ?>logout">Logout</a></li>
-                                </ul>
-								
-								
-								</li>-->
-
-
-                                        <?php //} else { 
+                                            <li class="nav-item dropdown social-icons">
+                                                <a class="nav-link dropdown-toggle" href="JavaScript:Void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fa fa-user"></i> Hi, <?php echo ucfirst($this->session->userdata('efull_name')); ?><i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
+                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin/profile">Profile</a>
+                                                    <a class="dropdown-item" href="https://www.travmaxholidays.com/invite_friend/<?php echo ucfirst($session->get('bliss_id')); ?>">Refer and Earn</a>
+                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>logout">Logout</a>
+                                                </div>
+                                            </li>
+                                        <?php } else { ?>
+                                            <li style="display:none;"><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Account</a></li>
+                                        <?php } ?>
+                                        <?php if ($session->has('is_customer_logged_in')) {
                                         ?>
-                                        <li style="display:none;"><a title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-user"></i> Account</a></li>
-                                        <?php //} 
-                                        ?>
-
-
-
-                                        <?php //if ($this->session->userdata('is_customer_logged_in')) { 
-                                        ?>
-                                        <!--li><a href="<?php echo base_url(); ?>logout"><i class="fa fa-lock"></i> Logout</a></li-->
-                                        <?php //} else { 
-                                        ?>
-                                        <li class="drop-nav">
-                                            <a id="login_btn" title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-sign-in"></i> Login</a>
-                                        </li>
-
-
-
-
-
-                                        <!---	 <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          More <i class="fa fa-angle-down"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="<?php echo base_url(); ?>merchants/admin/signup">Merchant Login</a>
-          
-        </div>  
-      </li>  --->
-                                        <!--<li class="dropdown">
-								<a href="#">More<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-									<li><a href="">Sell on Wishzon</a></li>
-									
+                                            <li><a href="<?php echo base_url(); ?>logout"><i class="fa fa-lock"></i> Logout</a></li>
+                                        <?php } else { ?>
+                                            <li class="drop-nav">
+                                                <a id="login_btn" title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-sign-in"></i> Login</a>
+                                            </li>
+                                        <?php } ?>
                                     </ul>
-                                </li> -->
-
-
-                                        <?php //} 
-                                        ?>
-                                    </ul>
-                                </div><!--/.nav-collapse -->
+                                </div>
                             </nav>
-                        </div><!--/.container-fluid -->
-
+                        </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
-
-
-
-        <!-- </div>
-</div> -->
-
-
-        <script>
-            $(document).ready(function() {
-                $(".onlinemerchant").click(function() {
-                    $(".onlinemerchant").addClass("active");
-                    $(".inlinemerchant").removeClass("active")
-                });
-                $(".inlinemerchant").click(function() {
-                    $(".inlinemerchant").addClass("active");
-                    $(".onlinemerchant").removeClass("active")
-                });
-                $(".serch_icon").click(function() {
-                    $(".prdcity").toggle()
-                })
-            });
-        </script>
-
-        </div>
-
-        </div>
-        </div>
-        </div><!--/header-middle-->
-
-
-
     </header>
     <script>
         $("#login_btn").click(function() {
