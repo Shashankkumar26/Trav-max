@@ -59,9 +59,9 @@
                                         <li><a href="/services">Services </a></li>
                                         <li><a href="/packages">Packages </a></li>
                                         <li><a href="/regis">Register </a></li>
-                                        <li><a href="<?php echo base_url(); ?>about">About </a></li>
-                                        <li><a href="<?php echo base_url(); ?>testimonials">Testimonials </a></li>
-                                        <li><a href="<?php echo base_url(); ?>partner">Be a Partner </a></li>
+                                        <li><a href="/about">About </a></li>
+                                        <li><a href="/testimonials">Testimonials </a></li>
+                                        <li><a href="/partner">Be a Partner </a></li>
                                         <li class="dropdown">
                                             <a href="#">More<i class="fa fa-angle-down"></i></a>
                                             <ul role="menu" class="sub-menu">

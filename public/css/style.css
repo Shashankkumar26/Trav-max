@@ -263,8 +263,6 @@ img {
     color: #fff;
 }
 
-
-
 .col01 h1 {
     text-align: center;
     padding-top: 20rem;
@@ -345,8 +343,6 @@ img {
     background-attachment: fixed;
 }
 
-
-
 /**** register ******/
 .main1 h2 {
     text-align: center;
@@ -383,7 +379,7 @@ img {
 
 /******* About ******/
 .Aboutt {
-    background-image: url(/assets/images/w3s.jpg);
+    background-image: url(/images/w3s.jpg);
     background-size: cover;
     position: relative;
     background-position: 50% 50%;
@@ -434,7 +430,7 @@ img {
 
 /**** testimonials******/
 .class01 {
-    background-image: url(/assets/images/indian-friends-hangout-happy-concept.jpg);
+    background-image: url(/images/indian-friends-hangout-happy-concept.jpg);
     background-size: cover;
     position: relative;
     background-position: 50% 50%;
@@ -559,7 +555,7 @@ img {
 /***** partner *******/
 
 .classs01 {
-    background-image: url(/assets/images/enjoying-freedom-sunny-day.jpg);
+    background-image: url(/images/enjoying-freedom-sunny-day.jpg);
     background-size: cover;
     position: relative;
     background-position: 50% 50%;
@@ -893,7 +889,7 @@ h1.divvv15 {
 }
 
 .Contact {
-    background-image: url(/assets/images/contas.jpg);
+    background-image: url(/images/contas.jpg);
     background-size: cover;
     position: relative;
     background-position: 50% 50%;

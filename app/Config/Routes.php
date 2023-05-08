@@ -34,6 +34,11 @@ $routes->get('/', 'CustomerFront::index');
 $routes->get('services', 'Page::services');
 $routes->get('packages', 'Page::packages');
 $routes->get('regis', 'Page::regis');
+$routes->get('about', 'Page::about');
+$routes->get('testimonials', 'Page::testimonials');
+$routes->get('partner', 'Page::partner');
+$routes->get('terms_of_use', 'Page::terms_of_use');
+$routes->get('contact_us', 'Page::contact_us');
 
 /*
  * --------------------------------------------------------------------
