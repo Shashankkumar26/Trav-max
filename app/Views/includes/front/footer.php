@@ -133,7 +133,7 @@ if (!$session->has('is_customer_logged_in')) { ?>
         event.preventDefault();
         jQuery.ajax({
             type: "POST",
-            url: "<?php echo base_url(); ?>login",
+            url: "/login",
             data: jQuery("#popup-login-form").serialize(),
             success: function(data) {
                 console.log(data);
