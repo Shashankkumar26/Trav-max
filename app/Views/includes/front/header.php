@@ -79,7 +79,7 @@
 
                                             <li class="nav-item dropdown social-icons">
                                                 <a class="nav-link dropdown-toggle" href="JavaScript:Void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-user"></i> Hi, <?php echo ucfirst($this->session->userdata('efull_name')); ?><i class="fa fa-angle-down"></i>
+                                                    <i class="fa fa-user"></i> Hi, <?php echo ucfirst($session->full_name); ?><i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>

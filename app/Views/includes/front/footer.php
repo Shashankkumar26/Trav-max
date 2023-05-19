@@ -119,12 +119,30 @@ if (!$session->has('is_customer_logged_in')) { ?>
 <?php } ?>
 <script>
     jQuery(".ferd3").click(function() {
-      jQuery(".fdr").hide();
-      jQuery(".sng-up").show();
+        jQuery(".fdr").hide();
+        jQuery(".sng-up").show();
     });
     jQuery(".lgt").click(function() {
-      jQuery(".fdr2").hide();
-      jQuery(".sng-up").hide();
-      jQuery(".fdr").show();
+        jQuery(".fdr2").hide();
+        jQuery(".sng-up").hide();
+        jQuery(".fdr").show();
+    });
+
+    //Login Button Click
+    jQuery('#popup-login-form').submit(function(event) {
+        event.preventDefault();
+        jQuery.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>login",
+            data: jQuery("#popup-login-form").serialize(),
+            success: function(data) {
+                console.log(data);
+                if (data.indexOf("alert alert-success") == "-1") {
+                    jQuery("#login-msg-div").html(data);
+                } else {
+                    window.location.href = "/admin";
+                }
+            }
+        });
     });
 </script>
