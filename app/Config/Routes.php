@@ -40,7 +40,10 @@ $routes->get('partner', 'Page::partner');
 $routes->get('terms_of_use', 'Page::terms_of_use');
 $routes->get('contact_us', 'Page::contact_us');
 
+// Admin Dashboard
 $routes->post('login', 'User::validate_credentials');
+$routes->get('admin', 'Profile::index');
+$routes->get('admin/logout', 'User::logout');
 
 /*
  * --------------------------------------------------------------------

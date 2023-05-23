@@ -28,4 +28,12 @@ class User extends BaseController
     {
         return md5($password);
     }
+
+    function logout()
+	{
+        $session = session();
+		$session->destroy();
+		header('Location: /');
+        die();
+	}
 }
