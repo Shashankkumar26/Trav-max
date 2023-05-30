@@ -194,7 +194,8 @@ class UserModel extends Model
                     'phone' => $_POST["number"],
                     'status' => 'active',
                     'pass_word' => md5($_POST["password"]),
-                    'parent_customer_id' => $_POST["trav_id"]
+                    'parent_customer_id' => $_POST["trav_id"],
+                    'role' => ucfirst($_POST["partner_type"])
                 ];
                 $query = $db->table('customer')->insert($new_member_insert_data);
                 $insert_id = $db->insertID();
