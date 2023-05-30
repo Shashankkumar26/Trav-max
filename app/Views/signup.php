@@ -3,7 +3,7 @@ $user_type = "";
 if (empty($_GET["plan"])) {
     header("LOCATION: /");
     die();
-}else {
+} else {
     $user_type = $_GET["plan"];
 }
 ?>
@@ -71,41 +71,41 @@ if (empty($_GET["plan"])) {
                     <div class="row g-0 g-md-3">
                         <div class="col-md">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="f_name" id="f_name" placeholder="John">
+                                <input type="text" class="form-control" name="f_name" id="f_name" placeholder="John" required>
                                 <label for="f_name">First Name</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="l_name" id="l_name" placeholder="Doe">
+                                <input type="text" class="form-control" name="l_name" id="l_name" placeholder="Doe" required>
                                 <label for="l_name">Last Name</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input name="number" type="number" class="form-control" id="phone" placeholder="name@example.com" aria-describedby="emailHelp">
+                        <input name="number" type="number" class="form-control" id="phone" placeholder="name@example.com" required>
                         <label for="phone">Phone number</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input name="email" type="email" class="form-control" id="email" placeholder="name@example.com" aria-describedby="emailHelp">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="name@example.com" aria-describedby="emailHelp" required>
                         <label for="email">Email address</label>
                     </div>
                     <div class="row g-0 g-md-3">
                         <div class="col-md">
                             <div class="form-floating mb-3">
-                                <input name="password" type="password" class="form-control" id="password" placeholder="*********">
+                                <input name="password" type="password" class="form-control" id="password" placeholder="*********" required>
                                 <label for="password">Password</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating mb-3">
-                                <input name="cpassword" type="password" class="form-control" id="cpassword" placeholder="*********">
+                                <input name="cpassword" type="password" class="form-control" id="cpassword" placeholder="*********" required>
                                 <label for="password">Confirm Password</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="trav_id" placeholder="01234">
+                        <input type="text" class="form-control" id="trav_id" name="trav_id" placeholder="01234" required>
                         <label for="trav_id">Referral ID</label>
                     </div>
                     <input type="hidden" name="partner_type" value="<?php echo $user_type; ?>">
@@ -132,12 +132,14 @@ if (empty($_GET["plan"])) {
             data: jQuery("#register-form").serialize(),
             success: function(data) {
                 console.log(data);
-                if (data) {
-                    var as = JSON.parse(data);
+                if (data.status == "error") {
                     jQuery("#signup_error").removeClass("d-none");
-                    jQuery("#signup_error").text(as["f_name"]);
-                } else {
-
+                    jQuery("#signup_error").text(data.message);
+                }else if(data.status == "success"){
+                    jQuery("#signup_error").removeClass("d-none");
+                    jQuery("#signup_error").removeClass("alert-danger");
+                    jQuery("#signup_error").addClass("alert-primary");
+                    jQuery("#signup_error").text(data.message);
                 }
                 jQuery("#loading_screen").addClass("d-none");
             }
