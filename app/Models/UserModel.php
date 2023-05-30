@@ -162,4 +162,8 @@ class UserModel extends Model
 		$query = $builder->get();
 		return $query->getResultArray();
 	}
+
+    function create_member(){
+        
+    }
 }

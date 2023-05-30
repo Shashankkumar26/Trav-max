@@ -96,4 +96,37 @@ class Page extends BaseController
 		$data['main_content'] = 'contact_us';
 		return view('includes/front/front_template', $data);
 	}
+
+	public function signup()
+	{
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'signup';
+		$data['page_title'] = 'signup';
+
+		$data['main_content'] = 'signup';
+		return view('signup', $data);
+	}
+
+	public function plans()
+	{
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'plans';
+		$data['page_title'] = 'plans';
+
+		$data['main_content'] = 'plans';
+		return view('includes/front/front_template', $data);
+	}
+
+	public function mega()
+	{
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'mega';
+		$data['page_title'] = 'mega';
+
+		$data['main_content'] = 'mega';
+		return view('includes/front/front_template', $data);
+	}
 }

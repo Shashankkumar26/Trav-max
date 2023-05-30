@@ -24,16 +24,39 @@ class User extends BaseController
         }
     }
 
+    function create_member()
+    {
+        $validation = \Config\Services::validation();
+        $validation->reset();
+        // field name, error message, validation rules
+        $validation->setRule('f_name', 'first name', 'trim|required|min_length[3]');
+        $validation->setRule('l_name', 'last name', 'trim|required');
+        $validation->setRule('email', 'email', 'trim|required|valid_email');
+        $validation->setRule('password', 'password', 'trim|required|min_length[6]|max_length[32]');
+        $validation->setRule('cpassword', 'confirm password', 'trim|required|min_length[6]|matches[password]');
+        $validation->setRule('phone', 'phone', 'trim|required|numeric|min_length[10]|max_length[10]');
+        $validation->setRule('trav_id', 'Referral id', 'required');
+
+        if (FALSE) {
+            $errors = $validation->getErrors();
+            echo json_encode($errors);
+        } else {
+            $user_model = model('UserModel');
+            $session = session();
+            $query = $user_model->create_member();
+        }
+    }
+
     function __encrip_password($password)
     {
         return md5($password);
     }
 
     function logout()
-	{
+    {
         $session = session();
-		$session->destroy();
-		header('Location: /');
+        $session->destroy();
+        header('Location: /');
         die();
-	}
+    }
 }

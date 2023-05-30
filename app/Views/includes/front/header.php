@@ -59,7 +59,6 @@
                                         <li><a href="<?php echo base_url(); ?>"> Home </a></li>
                                         <li><a href="/services">Services </a></li>
                                         <li><a href="/packages">Packages </a></li>
-                                        <li><a href="/regis">Register </a></li>
                                         <li><a href="/about">About </a></li>
                                         <li><a href="/testimonials">Testimonials </a></li>
                                         <li><a href="/partner">Be a Partner </a></li>
@@ -97,6 +96,9 @@
                                         <?php } else { ?>
                                             <li class="drop-nav">
                                                 <a id="login_btn" title="Login" href="javascript:;" data-toggle="modal" data-target="#registerLoginModal"><i class="fa fa-sign-in"></i> Login</a>
+                                            </li>
+                                            <li class="drop-nav" style="margin-left: 10px;">
+                                                <a id="" href="/plans">Signup</a>
                                             </li>
                                         <?php } ?>
                                     </ul>

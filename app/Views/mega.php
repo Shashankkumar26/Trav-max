@@ -1,0 +1,1 @@
+<img src="/images/mega_partner.jpg" alt="">

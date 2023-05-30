@@ -21,3 +21,4 @@ app/Config/App.php
 writable/session
 writable/debugbar
 writable/logs
+app/Config/Database.php
