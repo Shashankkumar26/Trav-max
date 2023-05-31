@@ -89,7 +89,7 @@ class Profile extends BaseController
         if ($data['has_package']) {
             $data["package_data"] = $user_model->get_package_data($data['package_information'][0]['package_id']);
         } else {
-            redirect(base_url() . 'admin/start');
+            return redirect()->to('admin/start');
         }
         $db = db_connect();
         $query = $db->query('SELECT travmoney, travprofit FROM customer where customer_id = "' . $customer_id . '" LIMIT 1');
@@ -97,6 +97,33 @@ class Profile extends BaseController
         $data['travmoney'] = $row->travmoney;
         $data['travprofit'] = $row->travprofit;
         $data['main_content'] = 'admin/home';
+        return view('includes/admin/template', $data);
+    }
+
+    public function start()
+    {
+        $user_model = model('UserModel');
+        $data['page_keywords'] = '';
+        $data['page_description'] = '';
+        $data['page_slug'] = 'Select Package';
+        $data['page_title'] = 'Start Your Journey';
+        $data['js'] = '/js/start.js';
+        $data['css'] = '/css/start.css';
+
+        $id = session('cust_id');
+        $customer_id = session('bliss_id');
+        $data['profile'] = $user_model->profile($id);
+        $data['has_package'] = false;
+        $data['package_information'] = $user_model->get_package($id);
+
+        if (empty($data['package_information'])) {
+            $data['has_package'] = false;
+        } else {
+            $data['has_package'] = true;
+            return redirect()->to(base_url().'admin');
+        }
+
+        $data['main_content'] = 'admin/start';
         return view('includes/admin/template', $data);
     }
 }
