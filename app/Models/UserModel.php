@@ -233,5 +233,54 @@ class UserModel extends Model
 
     function create_member()
     {
+        $db = db_connect();
+        $builder = $db->table('customer');
+        $builder->select('*');
+        $builder->where('email', $_POST["email"]);
+        $query = $builder->get();
+        if ($query->getNumRows() > 0) {
+            $data = array("status" => "error", "message" => "Email already exists.");
+            header("Content-Type: application/json");
+            echo json_encode($data);
+            exit();
+        } else {
+            $db = db_connect();
+            $builder = $db->table('customer');
+            $builder->select('*');
+            $builder->where('customer_id', $_POST["trav_id"]);
+            $query = $builder->get();
+            if ($query->getNumRows() == 0) {
+                $data = array("status" => "error", "message" => "Referral ID doesn't exist.");
+                header("Content-Type: application/json");
+                echo json_encode($data);
+                exit();
+            } else {
+                $new_member_insert_data = [
+                    'f_name' => $_POST["f_name"],
+                    'l_name' => $_POST["l_name"],
+                    'email' => $_POST["email"],
+                    'phone' => $_POST["number"],
+                    'status' => 'active',
+                    'pass_word' => md5($_POST["password"]),
+                    'parent_customer_id' => $_POST["trav_id"],
+                    'role' => ucfirst($_POST["partner_type"])
+                ];
+                $query = $db->table('customer')->insert($new_member_insert_data);
+                $insert_id = $db->insertID();
+                $f_name = $_POST["f_name"];
+                $phone = $_POST["number"];
+                $customer_n = $insert_id . substr($f_name, 0, 3) . substr($phone, -4);
+                $customer_id = strtoupper($customer_n);
+                
+                $builder = $db->table('customer');
+                $builder->set('customer_id', $customer_id);
+                $builder->where('id', $insert_id);
+                $builder->update();
+                $data = array("status" => "success", "message" => "Account created successfully.");
+                header("Content-Type: application/json");
+                echo json_encode($data);
+                exit();
+            }
+        }
     }
 }
