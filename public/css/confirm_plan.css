@@ -1,0 +1,106 @@
+html * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+#wrapper {
+    background: url("/images/confirm_plan_cover.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#content_box {
+    padding: 35px 35px;
+    max-width: 482px;
+    background: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin-top: 35px;
+}
+
+.heading_1 {
+    font-size: 35px;
+    font-weight: 800;
+    color: #32679d;
+}
+
+.text_1 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 35px;
+}
+
+.text_2 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.price_below_info {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.primary_btn {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.primary_btn:hover,
+.primary_btn:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742 !important;
+}
+
+.primary_btn:active {
+    opacity: .5;
+}
+
+#package_locations {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#package_days {
+    font-size: 18px;
+}
+
+#package_inclusions{
+    margin-top: -30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#package_terms{
+    font-size: 18px;
+    font-weight: 500;
+    color: #00CCFF;
+}

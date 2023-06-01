@@ -163,6 +163,74 @@ class UserModel extends Model
         return $query->getResultArray();
     }
 
+    public function add_user_package($data_to_store)
+    {
+        $db = db_connect();
+        $db->table('package_purchase')->insert($data_to_store);
+        return true;
+    }
+
+    public function update_profile($id, $data_to_store)
+    {
+        $db = db_connect();
+        $builder = $db->table('customer');
+        $builder->where('id', $id);
+        $builder->update($data_to_store);
+
+        return true;
+    }
+
+    public function add_installment($data)
+    {
+        $db = db_connect();
+        $builder = $db->table('installment');
+        $insert = $builder->insert($data);
+        return $insert;
+    }
+
+    public function get_all_packages()
+    {
+        $db = db_connect();
+        $builder = $db->table('package');
+        $query = $builder->get();
+        return $query->getResultArray();
+    }
+
+    public function get_payment_amount($id)
+    {
+        $db = db_connect();
+        $query = $db->table('installment')
+            ->select('amount')
+            ->where('user_id', $id)
+            ->where('status', 'Active')
+            ->get();
+
+        if ($query->getNumRows() > 0) {
+            return $query->getRow()->amount;
+        }
+
+        return null;
+    }
+
+    public function get_neft($neft)
+    {
+        $db = db_connect();
+        return $db->table('fund_request')
+            ->select('*')
+            ->where('neft', $neft)
+            ->get()
+            ->getResultArray();
+    }
+
+    public function insert_fund_request($data)
+    {
+        $db = db_connect();
+        $builder = $db->table('fund_request');
+        $builder->insert($data);
+
+        return true;
+    }
+
     function create_member()
     {
         $db = db_connect();

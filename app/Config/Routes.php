@@ -51,6 +51,12 @@ $routes->post('register', 'User::create_member');
 $routes->get('admin', 'Profile::index');
 $routes->get('admin/logout', 'User::logout');
 $routes->get('admin/start', 'Profile::start');
+$routes->get('admin/select_package', 'Profile::select_package');
+$routes->get('admin/package', 'Profile::package');
+$routes->get('admin/select_plan', 'Profile::select_plan');
+$routes->match(['get', 'post'],'admin/confirm_plan', 'Profile::confirm_plan');
+$routes->get('admin/package_selected_successfully', 'Profile::package_selected_successfully');
+$routes->match(['get', 'post'],'admin/request-fund', 'Profile::request-fund');
 
 
 /*
