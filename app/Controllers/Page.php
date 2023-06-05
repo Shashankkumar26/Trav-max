@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 class Page extends BaseController
 {
-    public function index()
-    {
-        echo 'hi';
-    }
+	public function index()
+	{
+		echo 'hi';
+	}
 
-    public function services()
+	public function services()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -20,7 +20,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function packages()
+	public function packages()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -31,7 +31,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function regis()
+	public function regis()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -42,7 +42,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function about()
+	public function about()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -53,7 +53,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function testimonials()
+	public function testimonials()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -64,7 +64,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function partner()
+	public function partner()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -75,7 +75,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function terms_of_use()
+	public function terms_of_use()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -86,7 +86,7 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
-    public function contact_us()
+	public function contact_us()
 	{
 		$data['page_keywords'] = '';
 		$data['page_description'] = '';
@@ -127,6 +127,43 @@ class Page extends BaseController
 		$data['page_title'] = 'mega';
 
 		$data['main_content'] = 'mega';
+		return view('includes/front/front_template', $data);
+	}
+
+	public function feedback()
+	{
+		$customer_model = model('CustomerModel');
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'feedback';
+		$data['page_title'] = 'feedback';
+		$data['category_list'] = $customer_model->get_category_list();
+		$data['feedback'] = '';
+
+		if ($this->request->getMethod() === 'post' && $this->request->getPost('contact') === 'Submit') {
+			$to = 'realwaterservices@gmail.com';
+			$subject = $this->request->getPost('subject');
+			$txt = 'email :- ' . $this->request->getPost('email') . '<br/>site speed :- ' . $this->request->getPost('speed') . '<br/>feedback :- ' . $this->request->getPost('message');
+			$headers = 'From: feedback@realwaterservicese.com' . "\r\n";
+			$headers .= 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type:text/html;charset=UTF-8' . "\r\n";
+			$headers .= 'From: <realwaterservices.com>' . "\r\n";
+			// mail($to, $subject, $txt, $headers);
+			$data['feedback'] = 'mail sent successfully';
+		}
+
+		$data['main_content'] = 'feedback';
+		return view('includes/front/front_template', $data);
+	}
+
+	public function invite_friend($cust_id)
+	{
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'invite_friend';
+		$data['page_title'] = 'invite_friend';
+		$data['cust_id'] = $cust_id;
+		$data['main_content'] = 'invite_friend';
 		return view('includes/front/front_template', $data);
 	}
 }

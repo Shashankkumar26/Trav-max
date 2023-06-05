@@ -43,6 +43,8 @@ $routes->get('signup', 'Page::signup');
 $routes->get('plans', 'Page::plans');
 $routes->get('mega', 'Page::mega');
 $routes->get('logout', 'User::logout');
+$routes->match(['get', 'post'],'feedback', 'Page::feedback');
+$routes->match(['get', 'post'],'invite_friend/(:any)', 'Page::invite_friend/$1');
 
 
 // Admin Dashboard
@@ -56,7 +58,15 @@ $routes->get('admin/package', 'Profile::package');
 $routes->get('admin/select_plan', 'Profile::select_plan');
 $routes->match(['get', 'post'],'admin/confirm_plan', 'Profile::confirm_plan');
 $routes->get('admin/package_selected_successfully', 'Profile::package_selected_successfully');
-$routes->match(['get', 'post'],'admin/request-fund', 'Profile::request-fund');
+$routes->match(['get', 'post'],'admin/request-fund', 'Profile::request_fund');
+$routes->get('admin/kyc', 'Profile::kyc');
+
+/*Distributor Level Information*/
+$routes->match(['get', 'post'],'admin/DistributorLevelInformation', 'DistributorLevelInformation::index');
+
+/*Installments*/
+$routes->get('admin/installments', 'Profile::installments');
+
 
 
 /*
