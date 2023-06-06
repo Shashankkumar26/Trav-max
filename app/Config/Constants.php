@@ -14,7 +14,8 @@
  | existing namespaces of App\* namespaced-classes.
  */
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
-
+define('RAZOR_KEY_ID', 'rzp_test_JWhO4MyBReoolt');
+define('RAZOR_KEY_SECRET', 'Q561FVic8d9expEFbUeHPfXE');
 /*
  | --------------------------------------------------------------------------
  | Composer Path

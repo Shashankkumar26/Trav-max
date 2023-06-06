@@ -49,6 +49,29 @@ class UserModel extends Model
         }
     }
 
+    public function parent_profile($blissid)
+    {
+        $db = db_connect();
+        $builder = $db->table('customer');
+        $builder->select('*');
+        $builder->where('customer_id', $blissid);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function friends_by_position_direct_in_array($cust_id)
+    {
+        $db = db_connect();
+        $builder = $db->table('customer');
+        $builder->select('id,f_name,l_name,customer_id,status,parent_customer_id,direct_customer_id,rdate,var_status,macro');
+        $builder->whereIn('direct_customer_id', $cust_id);
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+
     function get_total_income($id)
     {
         try {
@@ -271,7 +294,7 @@ class UserModel extends Model
                 $phone = $_POST["number"];
                 $customer_n = $insert_id . substr($f_name, 0, 3) . substr($phone, -4);
                 $customer_id = strtoupper($customer_n);
-                
+
                 $builder = $db->table('customer');
                 $builder->set('customer_id', $customer_id);
                 $builder->where('id', $insert_id);
@@ -282,5 +305,29 @@ class UserModel extends Model
                 exit();
             }
         }
+    }
+
+    public function get_all_installment($id)
+    {
+        $db = db_connect();
+
+        $builder = $db->table('installment as i');
+        $builder->select('*');
+        //$builder->join('pins as p', 'i.order_id = p.id', 'left');
+        $builder->where('i.user_id', $id);
+        $builder->orderBy('i.pay_date', 'asc');
+
+        $query = $builder->get();
+
+        return $query->getResultArray();
+    }
+
+    public function add_order($data_to_store)
+    {
+        $db = db_connect();
+        $builder = $db->table('transaction_summery');
+        $builder->insert($data_to_store);
+
+        return $this->db->insertID();
     }
 }

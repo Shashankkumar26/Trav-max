@@ -5,8 +5,8 @@
 <?php
 //flash messages
 $session = session();
-if ($session->flashdata('flash_message')) {
-  if ($session->flashdata('flash_message') == 'updated') {
+if ($session->getFlashdata('flash_message')) {
+  if ($session->getFlashdata('flash_message') == 'updated') {
     echo '<div class="alert alert-success">';
     echo '<a class="close" data-dismiss="alert">×</a>';
     echo '<strong>Well done!</strong> Requested Sent successfully.';
@@ -26,7 +26,7 @@ helper('form');
 $attributes = array('class' => 'form', 'id' => '');
 
 //form validation
-echo validation_errors();
+// echo validation_errors();
 //print_r($editor);
 
 echo form_open_multipart('admin/request-fund', $attributes);
@@ -41,7 +41,7 @@ echo form_open_multipart('admin/request-fund', $attributes);
         <?php if (!empty($payment_amount)) {
           echo '<input type="number" class="form-control" name="amount" value="' . $payment_amount . '" readonly>';
           echo '<input type="hidden" name="subject" value="installment">';
-        }else{
+        } else {
           echo '<input type="number" class="form-control" name="amount">';
           echo '<input type="hidden" name="subject" value="fund">';
         } ?>
@@ -61,14 +61,14 @@ echo form_open_multipart('admin/request-fund', $attributes);
 
       <div class="form-group col-sm-12 utr">
         <label class='name'> Bank Name</label>
-        <input type="text" class="form-control" name="bank_name" value="<?php if ($this->input->post('bank_name') != '') {
-                                                                          echo $this->input->post('bank_name');
+        <input type="text" class="form-control" name="bank_name" value="<?php if ($_POST['bank_name'] != '') {
+                                                                          echo $_POST['bank_name'];
                                                                         }  ?>">
       </div>
       <!--<div class="form-group col-sm-12">
             <label>Bank branch</label>
-              <input type="text" class="form-control"  name="bank_branch" value="<?php if ($this->input->post('bank_branch') != '') {
-                                                                                    echo $this->input->post('bank_branch');
+              <input type="text" class="form-control"  name="bank_branch" value="<?php if ($_POST['bank_branch'] != '') {
+                                                                                    echo $_POST['bank_branch'];
                                                                                   }  ?>" >
           </div>-->
       <div class="form-group col-sm-12 utr">
@@ -77,37 +77,37 @@ echo form_open_multipart('admin/request-fund', $attributes);
       </div>
       <div class="form-group col-sm-12 utr">
         <label class='two'>Image</label>
-        <input type="file" name="image" value="<?php if ($this->input->post('file') != '') {
-                                                  echo $this->input->post('file');
+        <input type="file" name="image" value="<?php if ($_POST['file'] != '') {
+                                                  echo $_POST['file'];
                                                 }  ?>">
       </div>
 
 
       <!--<div class="form-group col-sm-12">
             <label> IFSC Code</label>
-              <input type="text" class="form-control"  name="ifsc" value="<?php if ($this->input->post('ifsc') != '') {
-                                                                            echo $this->input->post('ifsc');
-                                                                          }  ?>" >
+              <input type="text" class="form-control"  name="ifsc" value="<?php if ($_POST['ifcs'] != '') {
+                                                                            echo $_POST['ifcs'];
+                                                                          }  ?>">
           </div>
        <div class="form-group col-sm-12">
             <label> NEFT / RTGS</label>
-              <input type="text" class="form-control"  name="neft" value="<?php if ($this->input->post('neft') != '') {
-                                                                            echo $this->input->post('neft');
-                                                                          }  ?>" >
+              <input type="text" class="form-control"  name="neft" value="<?php if ($_POST['neft'] != '') {
+                                                                            echo $_POST['neft'];
+                                                                          }  ?>">
           </div>-->
 
       <!--<div class="form-group col-lg-6 col-mg-6 col-sm-6">
             <label>Bank Name</label>
-              <input type="file" class="form-control"  name="image" value="<?php if ($this->input->post('image') != '') {
-                                                                              echo $this->input->post('image');
-                                                                            }  ?>" >
+              <input type="file" class="form-control"  name="image" value="<?php if ($_POST['image'] != '') {
+                                                                              echo $_POST['image'];
+                                                                            }  ?>">
           </div> -->
 
       <div class="form-group col-sm-12">
         <label>Description</label>
-        <textarea class="form-control" required="required" name="description" value="<?php if ($this->input->post('description') != '') {
-                                                                                        echo $this->input->post('description');
-                                                                                      } ?>"></textarea>
+        <textarea class="form-control" required="required" name="description" value="<?php if ($_POST['description'] != '') {
+                                                                                        echo $_POST['description'];
+                                                                                      }  ?>"></textarea>
       </div>
 
       <div class="col-lg-12 col-md-12">

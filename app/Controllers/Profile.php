@@ -544,4 +544,164 @@ class Profile extends BaseController
         $data['main_content'] = 'admin/request_fund';
         return view('includes/admin/template', $data);
     }
+
+    public function kyc()
+    {
+        $user_model = model('UserModel');
+        $session = session();
+        $validation = \Config\Services::validation();
+        $id = $session->get('cust_id');
+        $customer_id = $session->get('bliss_id');
+
+        if ($this->request->getMethod() === 'post') {
+            $validation->setRules([
+                'bank_name' => 'required|trim',
+                //'branch' => 'required|trim',
+                'account_name' => 'required',
+                //'account_type' => 'required|trim',
+                'account_no' => 'required|trim',
+                'ifsc' => 'required'
+            ]);
+
+            if ($validation->withRequest($this->request)->run()) {
+                $panimage = '';
+                $uploadConfig = [
+                    'path' => 'images/user/',
+                    'allowed_types' => 'gif|jpg|png|jpeg',
+                    'max_width' => 1024,
+                    'max_height' => 1024
+                ];
+                $upload = $this->upload->withConfig($uploadConfig);
+
+                if ($panimageFile = $this->request->getFile('panimage')) {
+                    if ($this->request->getPost('panimage_old') != '') {
+                        unlink('images/user/' . $this->request->getPost('panimage_old'));
+                    }
+
+                    if ($upload->doUpload('panimage')) {
+                        $panimage = $upload->getName();
+                    } else {
+                        $panimage = $this->request->getPost('panimage_old');
+                    }
+                }
+
+                $aadharimage = '';
+                if ($aadharimageFile = $this->request->getFile('aadharimage')) {
+                    if ($this->request->getPost('aadharimage_old') != '') {
+                        unlink('images/user/' . $this->request->getPost('aadharimage_old'));
+                    }
+
+                    if ($upload->doUpload('aadharimage')) {
+                        $aadharimage = $upload->getName();
+                    } else {
+                        $aadharimage = $this->request->getPost('aadharimage_old');
+                    }
+                }
+
+                $cheque_img = '';
+                if ($chequeImgFile = $this->request->getFile('cheque_img')) {
+                    if ($this->request->getPost('cheque_img_old') != '') {
+                        unlink('images/user/' . $this->request->getPost('cheque_img_old'));
+                    }
+
+                    if ($upload->doUpload('cheque_img')) {
+                        $cheque_img = $upload->getName();
+                    } else {
+                        $cheque_img = $this->request->getPost('cheque_img_old');
+                    }
+                }
+
+                $data_to_store = [
+                    'pancard' => $this->request->getPost('pancard'),
+                    'applied_pan' => $applied_pan,
+                    'panimage' => $panimage,
+                    'aadhar' => $this->request->getPost('aadhar'),
+                    'applied_aadhar' => $applied_aadhar,
+                    'aadharimage' => $aadharimage,
+                    'cheque_img' => $cheque_img,
+                    'gender' => $this->request->getPost('gender'),
+                    'bank_name' => $this->request->getPost('bank_name'),
+                    //'branch' => $this->request->getPost('branch'), 
+                    'account_name' => $this->request->getPost('account_name'),
+                    //'account_type' => $this->request->getPost('account_type'),  
+                    'account_no' => $this->request->getPost('account_no'),
+                    //'bank_city' => $this->request->getPost('bank_city'),
+                    //'bank_state' => $this->request->getPost('bank_state'), 
+                    'ifsc' => $this->request->getPost('ifsc'),
+                    'var_status' => $var_status
+                ];
+
+                $return = $user_model->update_profile($id, $data_to_store);
+
+                if ($return == true) {
+                    $session->setFlashdata('flash_message', 'updated');
+                    return redirect()->to(base_url() . 'admin/kyc');
+                } else {
+                    $session->setFlashdata('flash_message', 'not_updated');
+                }
+            }
+        }
+
+        $data['profile'] = $user_model->profile($id);
+        $data['main_content'] = 'admin/kyc';
+        return view('includes/admin/template', $data);
+    }
+
+    public function installments()
+    {
+        $user_model = model('UserModel');
+        $id = session()->get('cust_id');
+        $customer_id = session()->get('bliss_id');
+        $data['profile'] = $user_model->profile($id);
+        $data['pin'] = $user_model->get_all_installment($id);
+
+        $razorpay = 'false';
+
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'amount' => 'required'
+            ];
+            $errors = [
+                'amount' => [
+                    'required' => 'The amount field is required.'
+                ]
+            ];
+
+            if ($this->validate($rules, $errors)) {
+                if ($this->request->getPost('how_to_pay') == 'razorpay') {
+                    $status = 'Process';
+                } else {
+                    $status = 'Pending';
+                }
+
+                $data_to_store = [
+                    'user_id' => $id,
+                    'dis' => 'Installment amount',
+                    'cr' => $this->request->getPost('amount'),
+                    'qty' => 1,
+                    'how_to_pay' => $this->request->getPost('how_to_pay'),
+                    'status' => $status,
+                ];
+                $order_id = $user_model->add_order($data_to_store);
+
+                $razorpay = 'true';
+            }
+        }
+
+        if ($razorpay == 'true') {
+            $data['order_id'] = $order_id;
+            $data['order_amt'] = $this->request->getPost('amount');
+            $data['oname'] = $data['profile'][0]['f_name'];
+            $data['phone'] = $data['profile'][0]['phone'];
+            $data['email'] = $data['profile'][0]['email'];
+            $data['contst'] = 'Installment';
+            $data['returnuri'] = 'admin/installments';
+            session()->set('insid', $this->request->getPost('id'));
+            $data['main_content'] = 'admin/razorpay';
+            return view('includes/admin/template', $data);
+        } else {
+            $data['main_content'] = 'admin/installment';
+            return view('includes/admin/template', $data);
+        }
+    }
 }
