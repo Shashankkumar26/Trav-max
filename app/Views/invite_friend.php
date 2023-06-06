@@ -223,7 +223,7 @@
     <div class="text-center py-md-5">
         <p class="heading_1 my-md-5">Invite Friends</p>
         <a id="whatsapp_share_link" href="">Share Via Whatsapp <i class="fa fa-whatsapp ms-3" aria-hidden="true"></i></a>
-        <input id="the_text" type="hidden" value="http://localhost:8080/plans?refer_id=<?php echo $cust_id; ?>" size="50">
+        <input id="the_text" type="hidden" value="<?php echo base_url()?>plans?refer_id=<?php echo $cust_id; ?>" size="50">
         <p id="copy_share_link" onclick="copyById('the_text')">Share Your Link</p>
         <div class="alert alert-success d-none" role="alert" id="copy_success">
             Link Copied Successfully!
