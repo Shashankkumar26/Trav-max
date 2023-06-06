@@ -140,6 +140,7 @@ if (empty($_GET["plan"])) {
                     jQuery("#signup_error").removeClass("alert-danger");
                     jQuery("#signup_error").addClass("alert-primary");
                     jQuery("#signup_error").text(data.message);
+                    window.location.replace("/admin");
                 }
                 jQuery("#loading_screen").addClass("d-none");
             }

@@ -278,6 +278,10 @@ class UserModel extends Model
                 echo json_encode($data);
                 exit();
             } else {
+                $booking_packages_number = 1;
+                if ($_POST["partner_type"] == "macro") {
+                    $booking_packages_number = 5;
+                }
                 $new_member_insert_data = [
                     'f_name' => $_POST["f_name"],
                     'l_name' => $_POST["l_name"],
@@ -286,7 +290,8 @@ class UserModel extends Model
                     'status' => 'active',
                     'pass_word' => md5($_POST["password"]),
                     'parent_customer_id' => $_POST["trav_id"],
-                    'role' => ucfirst($_POST["partner_type"])
+                    'role' => ucfirst($_POST["partner_type"]),
+                    'booking_packages_number' => $booking_packages_number
                 ];
                 $query = $db->table('customer')->insert($new_member_insert_data);
                 $insert_id = $db->insertID();
@@ -300,6 +305,9 @@ class UserModel extends Model
                 $builder->where('id', $insert_id);
                 $builder->update();
                 $data = array("status" => "success", "message" => "Account created successfully.");
+                $session = session();
+                $session_data = array('full_name' => $f_name, 'email' => $_POST["l_name"], 'trav_id' => $customer_id,  'cust_id' => $insert_id, 'is_customer_logged_in' => true);
+                $session->set($session_data);
                 header("Content-Type: application/json");
                 echo json_encode($data);
                 exit();

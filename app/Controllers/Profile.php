@@ -238,7 +238,7 @@ class Profile extends BaseController
         $data['js'] = '/js/select_package.js';
 
         $id = session()->get('cust_id');
-        $customer_id = session()->get('bliss_id');
+        $customer_id = session()->get('trav_id');
         $data['profile'] = $user_model->profile($id);
         $data['has_package'] = false;
         $data['package_information'] = $user_model->get_package($id);
@@ -255,6 +255,13 @@ class Profile extends BaseController
         }
 
         $data['package_data'] = $user_model->get_package_data($package_id);
+        $db = db_connect();
+        $query   = $db->query('select booking_packages_number from customer where customer_id = "' . $customer_id . '"');
+        $results = $query->getResultArray();
+        $booking_packages_number = 1;
+        foreach ($results as $row) {
+            $booking_packages_number = $row['booking_packages_number'];
+        }
         if ($this->request->getMethod() === 'post') {
             $package_id = $this->request->getPost('package_id');
             $payment_type = $this->request->getPost('payment_type');
@@ -269,7 +276,7 @@ class Profile extends BaseController
             $return = $user_model->add_user_package($data_to_store);
 
             $date = date('Y-m-d H:i:s');
-            $data_to_store = array('role' => 'Macro', 'package_used' => $date, 'macro' => 33, 'consume' => 1, 'package_amt' => $package_amount);
+            $data_to_store = array('package_used' => $date, 'macro' => 33, 'consume' => 1, 'package_amt' => $package_amount);
             $user_model->update_profile($id, $data_to_store);
 
             if ($payment_type == "traveasy_plan") {
@@ -297,6 +304,7 @@ class Profile extends BaseController
                 session()->setFlashdata('flash_message', 'not_updated');
             }
         }
+        $data['booking_packages_number'] = $booking_packages_number;
         $data['all_packages'] = $user_model->get_all_packages();
 
         $data['main_content'] = 'admin/select_plan';
@@ -315,32 +323,51 @@ class Profile extends BaseController
         $data['js'] = '/js/confirm_plan.js';
 
         $id = session('cust_id');
-        $customer_id = session('bliss_id');
+        $customer_id = session('trav_id');
         $data['profile'] = $user_model->profile($id);
 
         $package_id = $this->request->getGet('package');
         $payment_plan = $this->request->getGet('plan');
         $payment_amount = 0;
         $data['package_data'] = $user_model->get_package_data($package_id);
-
-        if ($payment_plan == 'traveasy_plan') {
-            $payment_amount = 6600;
-        } elseif ($payment_plan == 'travlater_plan') {
-            $payment_amount = 13200;
-        } elseif ($payment_plan == 'travnow_plan') {
-            $payment_amount = $data['package_data'][0]['total'];
+        $db = db_connect();
+        $query   = $db->query('select booking_packages_number from customer where customer_id = "' . $customer_id . '"');
+        $results = $query->getResultArray();
+        $booking_packages_number = 1;
+        foreach ($results as $row) {
+            $booking_packages_number = $row['booking_packages_number'];
         }
-
+        if ($payment_plan == 'traveasy_plan') {
+            $payment_amount = 5500 * $booking_packages_number;
+        } elseif ($payment_plan == 'travlater_plan') {
+            $payment_amount = 11000 * $booking_packages_number;
+        } elseif ($payment_plan == 'travnow_plan') {
+            $payment_amount = $data['package_data'][0]['total'] * $booking_packages_number;
+        }
         if ($this->request->getMethod() === 'post') {
             $package_id = $this->request->getPost('package_id');
             $payment_type = $this->request->getPost('payment_type');
             $package_data = $user_model->get_package_data($package_id);
-            $package_amount = $package_data[0]['total'];
+            $package = $package_data[0];
+            $package_amount_with_tax = $package["total"] + ($package["total"] * 0.05) + ($package["total"] * 0.05);
+
+            for ($i = 1; $i <= $booking_packages_number; $i++) {
+                $add_purchase_data = [
+                    'customer_id' => $customer_id,
+                    'type' => 'package',
+                    'item_id' => $package_id,
+                    'purchase_date' => date('d-M-Y H:i:s'),
+                    'purchase_price' => $package_amount_with_tax,
+                    'status' => 'booked',
+                ];
+                $query = $db->table('purchase')->insert($add_purchase_data);
+            }
+
             $data_to_store = [
                 'user_id' => $id,
                 'package_id' => $package_id,
                 'payment_type' => $payment_type,
-                'amount_remaining' => $package_amount
+                'amount_remaining' => $package_amount_with_tax
             ];
             $return = $user_model->add_user_package($data_to_store);
 
@@ -350,12 +377,12 @@ class Profile extends BaseController
                 'package_used' => $date,
                 'macro' => 33,
                 'consume' => 1,
-                'package_amt' => $package_amount
+                'package_amt' => $package_amount_with_tax
             ];
             $user_model->update_profile($id, $data_to_store);
 
             if ($payment_type == 'traveasy_plan') {
-                $intallment_amount_left = $package_amount;
+                $intallment_amount_left = $package_amount_with_tax;
                 $installment_amount = 6600;
                 $installment_number = 1;
                 $insdate = date('Y-m-d');
@@ -380,8 +407,8 @@ class Profile extends BaseController
                     }
                 }
             } elseif ($payment_type == 'travnow_plan') {
-                $intallment_amount_left = $package_amount;
-                $installment_amount = $package_amount;
+                $intallment_amount_left = $package_amount_with_tax;
+                $installment_amount = $package_amount_with_tax;
                 $installment_number = 1;
                 $insdate = date('Y-m-d');
                 $pay_date = date('Y-m-d');
@@ -395,7 +422,7 @@ class Profile extends BaseController
                 ];
                 $user_model->add_installment($add_installment);
             } elseif ($payment_type == 'travlater_plan') {
-                $intallment_amount_left = $package_amount;
+                $intallment_amount_left = $package_amount_with_tax;
                 $installment_amount = 13200;
                 $installment_number = 1;
                 $insdate = date('Y-m-d');

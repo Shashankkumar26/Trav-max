@@ -10,7 +10,11 @@
                 <p>Earn Free Holidays</p>
             </div>
             <div class="card-footer">
-                <h2>Rs.<span id="travnow_price">69900</span></h2>
+                <?php if ($booking_packages_number == 1) {
+                    echo '<h2>Rs.<span id="travnow_price">' . $package_data[0]['total'] . '</span></h2>';
+                } else {
+                    echo '<h2>Rs.<span id="travnow_price">' . $package_data[0]['total'] . ' * ' . $booking_packages_number . '</span></h2>';
+                } ?>
             </div>
         </div>
         <div class="card plan_box" id="travlater_plan">
@@ -23,10 +27,15 @@
                 <p>Earn Free Holidays</p>
             </div>
             <div class="card-footer">
-                <h2 id="travlater_price">Rs.13200</h2>
+                <?php if ($booking_packages_number == 1) {
+                    echo '<h2 id="travlater_price">Rs.11000</h2>';
+                } else {
+                    echo '<h2 id="travlater_price">Rs.11000 * ' . $booking_packages_number . '</h2>';
+                } ?>
+                
             </div>
         </div>
-        <div class="card plan_box" id="traveasy_plan">
+        <!-- <div class="card plan_box" id="traveasy_plan">
             <div class="card-body">
                 <h5 class="card-title">trav<span style="color: #97030f;">easy</span></h5>
                 <p>Book Now</p>
@@ -39,7 +48,7 @@
             <div class="card-footer">
                 <h2 id="traveasy_price">Rs.6600</h2>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="w-100 mt-5 text-center">
         <a disabled href="/admin/confirm_plan?package=<?php echo $_GET["package"]; ?>&plan=" id="confirm_btn" class="primary_btn">Continue</a>
