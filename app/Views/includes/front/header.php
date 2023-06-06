@@ -81,9 +81,9 @@
                                                     <i class="fa fa-user"></i> Hi, <?php echo ucfirst($session->full_name); ?><i class="fa fa-angle-down"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu1 " aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin">Dashboard</a>
-                                                    <a class="dropdown-item" href="<?php echo base_url(); ?>admin/profile">Profile</a>
-                                                    <a class="dropdown-item" href="https://www.travmaxholidays.com/invite_friend/<?php echo ucfirst($session->get('bliss_id')); ?>">Refer and Earn</a>
+                                                    <a class="dropdown-item" href="/admin">Dashboard</a>
+                                                    <a class="dropdown-item" href="/admin/profile">Profile</a>
+                                                    <a class="dropdown-item" href="/invite_friend/<?php echo ucfirst($session->get('trav_id')); ?>">Refer and Earn</a>
                                                     <a class="dropdown-item" href="admin/logout">Logout</a>
                                                 </div>
                                             </li>
