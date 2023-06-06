@@ -105,7 +105,7 @@ if (empty($_GET["plan"])) {
                         </div>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="trav_id" name="trav_id" placeholder="01234" required>
+                        <input type="text" class="form-control" id="trav_id" name="trav_id" placeholder="01234" required value="<?php echo isset($_GET['refer_id']) ? $_GET['refer_id'] : ''; ?>">
                         <label for="trav_id">Referral ID</label>
                     </div>
                     <input type="hidden" name="partner_type" value="<?php echo $user_type; ?>">
