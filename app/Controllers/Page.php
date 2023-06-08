@@ -119,6 +119,17 @@ class Page extends BaseController
 		return view('includes/front/front_template', $data);
 	}
 
+	public function micro_plans()
+	{
+		$data['page_keywords'] = '';
+		$data['page_description'] = '';
+		$data['page_slug'] = 'micro_plans';
+		$data['page_title'] = 'micro_plans';
+
+		$data['main_content'] = 'micro_plans';
+		return view('includes/front/front_template', $data);
+	}
+
 	public function mega()
 	{
 		$data['page_keywords'] = '';

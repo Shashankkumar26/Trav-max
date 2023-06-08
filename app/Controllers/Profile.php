@@ -92,10 +92,11 @@ class Profile extends BaseController
             return redirect()->to('admin/start');
         }
         $db = db_connect();
-        $query = $db->query('SELECT travmoney, travprofit FROM customer where customer_id = "' . $customer_id . '" LIMIT 1');
+        $query = $db->query('SELECT travmoney, travprofit, status FROM customer where customer_id = "' . $customer_id . '" LIMIT 1');
         $row = $query->getRow();
         $data['travmoney'] = $row->travmoney;
         $data['travprofit'] = $row->travprofit;
+        $data['status'] = $row->status;
         $data['main_content'] = 'admin/home';
         return view('includes/admin/template', $data);
     }
@@ -330,13 +331,12 @@ class Profile extends BaseController
         $payment_plan = $this->request->getGet('plan');
         $payment_amount = 0;
         $data['package_data'] = $user_model->get_package_data($package_id);
+
         $db = db_connect();
         $query   = $db->query('select booking_packages_number from customer where customer_id = "' . $customer_id . '"');
-        $results = $query->getResultArray();
-        $booking_packages_number = 1;
-        foreach ($results as $row) {
-            $booking_packages_number = $row['booking_packages_number'];
-        }
+        $result = $query->getRowArray();
+        $booking_packages_number = $result['booking_packages_number'];
+
         if ($payment_plan == 'traveasy_plan') {
             $payment_amount = 5500 * $booking_packages_number;
         } elseif ($payment_plan == 'travlater_plan') {
@@ -344,6 +344,8 @@ class Profile extends BaseController
         } elseif ($payment_plan == 'travnow_plan') {
             $payment_amount = $data['package_data'][0]['total'] * $booking_packages_number;
         }
+        $data['payment_amount'] = $payment_amount;
+
         if ($this->request->getMethod() === 'post') {
             $package_id = $this->request->getPost('package_id');
             $payment_type = $this->request->getPost('payment_type');
@@ -351,6 +353,7 @@ class Profile extends BaseController
             $package = $package_data[0];
             $package_amount_with_tax = $package["total"] + ($package["total"] * 0.05) + ($package["total"] * 0.05);
 
+            //Add packages to user in purchase table
             for ($i = 1; $i <= $booking_packages_number; $i++) {
                 $add_purchase_data = [
                     'customer_id' => $customer_id,
@@ -361,8 +364,98 @@ class Profile extends BaseController
                     'status' => 'booked',
                 ];
                 $query = $db->table('purchase')->insert($add_purchase_data);
+                $purchase_id = $db->insertID();
+                //installments
+                if ($payment_type == 'traveasy_plan') {
+                    $intallment_amount_left = $package_amount_with_tax;
+                    $installment_amount = 6600;
+                    $installment_number = 1;
+                    $insdate = date('Y-m-d');
+                    while ($intallment_amount_left > 0) {
+                        $pay_date = date('Y-m-d', strtotime("+ 1 month", strtotime($insdate)));
+                        $add_installment = [
+                            'user_id' => $id,
+                            'amount' => $installment_amount,
+                            'description' => $insdate,
+                            'pay_date' => $pay_date,
+                            'installment_no' => $installment_number,
+                            'status' => 'Active'
+                        ];
+                        $user_model->add_installment($add_installment);
+                        $insdate = $pay_date;
+                        $intallment_amount_left -= 6600;
+                        $installment_number += 1;
+                        if ($intallment_amount_left > 6600) {
+                            $installment_amount = 6600;
+                        } else {
+                            $installment_amount = $intallment_amount_left;
+                        }
+                    }
+                } elseif ($payment_type == 'travnow_plan') {
+                    $intallment_amount_left = $package_amount_with_tax;
+                    $installment_amount = $package_amount_with_tax;
+                    $installment_number = 1;
+                    $insdate = date('Y-m-d');
+                    $pay_date = date('Y-m-d');
+                    $add_installment = [
+                        'user_id' => $id,
+                        'amount' => $installment_amount,
+                        'description' => $insdate,
+                        'pay_date' => $pay_date,
+                        'installment_no' => $installment_number,
+                        'status' => 'Active'
+                    ];
+                    $user_model->add_installment($add_installment);
+                } elseif ($payment_type == 'travlater_plan') {
+                    $intallment_amount_left = $package_amount_with_tax;
+                    $installment_amount = 11000;
+                    $installment_number = 1;
+                    $insdate = date('Y-m-d');
+                    $pay_date = date('Y-m-d');
+                    $add_installment = [
+                        'user_id' => $id,
+                        'amount' => $installment_amount,
+                        'description' => $insdate,
+                        'pay_date' => $pay_date,
+                        'installment_no' => $installment_number,
+                        'status' => 'Active',
+                        'order_id' => $purchase_id
+                    ];
+                    $user_model->add_installment($add_installment);
+                    $insdate = $pay_date;
+                    $intallment_amount_left -= 11000;
+                    $installment_number += 1;
+                    if ($intallment_amount_left > 5500) {
+                        $installment_amount = 5500;
+                    } else {
+                        $installment_amount = $intallment_amount_left;
+                    }
+                    $installment_amount = 5500;
+                    while ($intallment_amount_left > 0) {
+                        $pay_date = date('Y-m-d', strtotime("+ 1 month", strtotime($insdate)));
+                        $add_installment = [
+                            'user_id' => $id,
+                            'amount' => $installment_amount,
+                            'description' => $insdate,
+                            'pay_date' => $pay_date,
+                            'installment_no' => $installment_number,
+                            'status' => 'Active',
+                            'order_id' => $purchase_id
+                        ];
+                        $user_model->add_installment($add_installment);
+                        $insdate = $pay_date;
+                        $intallment_amount_left -= 5500;
+                        $installment_number += 1;
+                        if ($intallment_amount_left > 5500) {
+                            $installment_amount = 5500;
+                        } else {
+                            $installment_amount = $intallment_amount_left;
+                        }
+                    }
+                }
             }
 
+            //Need to delete this and update changes as required.
             $data_to_store = [
                 'user_id' => $id,
                 'package_id' => $package_id,
@@ -371,102 +464,6 @@ class Profile extends BaseController
             ];
             $return = $user_model->add_user_package($data_to_store);
 
-            $date = date('Y-m-d H:i:s');
-            $data_to_store = [
-                'role' => 'Macro',
-                'package_used' => $date,
-                'macro' => 33,
-                'consume' => 1,
-                'package_amt' => $package_amount_with_tax
-            ];
-            $user_model->update_profile($id, $data_to_store);
-
-            if ($payment_type == 'traveasy_plan') {
-                $intallment_amount_left = $package_amount_with_tax;
-                $installment_amount = 6600;
-                $installment_number = 1;
-                $insdate = date('Y-m-d');
-                while ($intallment_amount_left > 0) {
-                    $pay_date = date('Y-m-d', strtotime("+ 1 month", strtotime($insdate)));
-                    $add_installment = [
-                        'user_id' => $id,
-                        'amount' => $installment_amount,
-                        'description' => $insdate,
-                        'pay_date' => $pay_date,
-                        'installment_no' => $installment_number,
-                        'status' => 'Active'
-                    ];
-                    $user_model->add_installment($add_installment);
-                    $insdate = $pay_date;
-                    $intallment_amount_left -= 6600;
-                    $installment_number += 1;
-                    if ($intallment_amount_left > 6600) {
-                        $installment_amount = 6600;
-                    } else {
-                        $installment_amount = $intallment_amount_left;
-                    }
-                }
-            } elseif ($payment_type == 'travnow_plan') {
-                $intallment_amount_left = $package_amount_with_tax;
-                $installment_amount = $package_amount_with_tax;
-                $installment_number = 1;
-                $insdate = date('Y-m-d');
-                $pay_date = date('Y-m-d');
-                $add_installment = [
-                    'user_id' => $id,
-                    'amount' => $installment_amount,
-                    'description' => $insdate,
-                    'pay_date' => $pay_date,
-                    'installment_no' => $installment_number,
-                    'status' => 'Active'
-                ];
-                $user_model->add_installment($add_installment);
-            } elseif ($payment_type == 'travlater_plan') {
-                $intallment_amount_left = $package_amount_with_tax;
-                $installment_amount = 13200;
-                $installment_number = 1;
-                $insdate = date('Y-m-d');
-
-                $pay_date = date('Y-m-d');
-                $add_installment = [
-                    'user_id' => $id,
-                    'amount' => $installment_amount,
-                    'description' => $insdate,
-                    'pay_date' => $pay_date,
-                    'installment_no' => $installment_number,
-                    'status' => 'Active'
-                ];
-                $user_model->add_installment($add_installment);
-                $insdate = $pay_date;
-                $intallment_amount_left -= 13200;
-                $installment_number += 1;
-                if ($intallment_amount_left > 6600) {
-                    $installment_amount = 6600;
-                } else {
-                    $installment_amount = $intallment_amount_left;
-                }
-                $installment_amount = 6600;
-                while ($intallment_amount_left > 0) {
-                    $pay_date = date('Y-m-d', strtotime("+ 1 month", strtotime($insdate)));
-                    $add_installment = [
-                        'user_id' => $id,
-                        'amount' => $installment_amount,
-                        'description' => $insdate,
-                        'pay_date' => $pay_date,
-                        'installment_no' => $installment_number,
-                        'status' => 'Active'
-                    ];
-                    $user_model->add_installment($add_installment);
-                    $insdate = $pay_date;
-                    $intallment_amount_left -= 6600;
-                    $installment_number += 1;
-                    if ($intallment_amount_left > 6600) {
-                        $installment_amount = 6600;
-                    } else {
-                        $installment_amount = $intallment_amount_left;
-                    }
-                }
-            }
             if ($return == true) {
                 return redirect()->to(base_url('admin/package_selected_successfully'));
             } else {
@@ -474,7 +471,6 @@ class Profile extends BaseController
             }
         }
 
-        $data['payment_amount'] = $payment_amount;
         $data['main_content'] = 'admin/confirm_plan';
         return view('includes/admin/template', $data);
     }

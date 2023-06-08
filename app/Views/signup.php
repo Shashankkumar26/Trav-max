@@ -5,6 +5,12 @@ if (empty($_GET["plan"])) {
     die();
 } else {
     $user_type = $_GET["plan"];
+    $booking_packages_number = 1;
+    if ($user_type == "micro") {
+        $booking_packages_number = $_GET["micro"];
+    }else if ($user_type == "macro") {
+        $booking_packages_number = 5;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -109,6 +115,7 @@ if (empty($_GET["plan"])) {
                         <label for="trav_id">Referral ID</label>
                     </div>
                     <input type="hidden" name="partner_type" value="<?php echo $user_type; ?>">
+                    <input type="hidden" name="booking_packages_number" value="<?php echo $booking_packages_number; ?>">
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">I agree to all terms and conditions.</label>

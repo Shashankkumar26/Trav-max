@@ -41,6 +41,7 @@ $routes->get('terms_of_use', 'Page::terms_of_use');
 $routes->get('contact_us', 'Page::contact_us');
 $routes->get('signup', 'Page::signup');
 $routes->get('plans', 'Page::plans');
+$routes->get('micro_plans', 'Page::micro_plans');
 $routes->get('mega', 'Page::mega');
 $routes->get('logout', 'User::logout');
 $routes->match(['get', 'post'],'feedback', 'Page::feedback');

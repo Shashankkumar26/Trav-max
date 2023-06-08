@@ -9,7 +9,7 @@
         <img class="img-fluid" src="/images/features.jpg" alt="">
     </div>
     <div class="col">
-        <a href="/signup?plan=micro<?php echo isset($_GET['refer_id']) ? '&refer_id=' . $_GET['refer_id'] : ''; ?>">
+        <a href="/micro_plans<?php echo isset($_GET['refer_id']) ? '&refer_id=' . $_GET['refer_id'] : ''; ?>">
             <img class="img-fluid plan" src="/images/micro_plan.jpg" alt="">
         </a>
     </div>
