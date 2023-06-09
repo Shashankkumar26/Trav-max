@@ -131,7 +131,7 @@ if (empty($_GET["plan"])) {
             url: "/register",
             data: jQuery("#register-form").serialize(),
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.status == "error") {
                     jQuery("#signup_error").removeClass("d-none");
                     jQuery("#signup_error").text(data.message);
