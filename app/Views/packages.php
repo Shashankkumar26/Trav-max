@@ -14,28 +14,21 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <a href="<?php echo base_url(); ?>package/phuket-krabi">
-                    <img src="/images/p02.jpg" class="img-fluid" alt="...">
-                    <h4>Phuket with Krabi</h4>
+                <img src="/images/p02.jpg" class="img-fluid" alt="...">
+                <h4>Phuket with Krabi</h4>
+            </div>
+            <div class="col-sm-6">
+                <img src="/images/p04.jpg" class="img-fluid" alt="...">
+                <h4>Magical Maldives </h4>
                 </a>
             </div>
             <div class="col-sm-6">
-                <a href="<?php echo base_url(); ?>package/maldives">
-                    <img src="/images/p04.jpg" class="img-fluid" alt="...">
-                    <h4>Magical Maldives </h4>
-                </a>
-            </div>
-            <div class="col-sm-6">
-                <a href="/package/dubai">
                     <img src="/images/p03.jpg" class="img-fluid" alt="...">
                     <h4>Exciting Dubai </h4>
-                </a>
             </div>
             <div class="col-sm-6">
-                <a href="/package/bali">
-                    <img src="/images/prg1.jpg" class="img-fluid" alt="...">
-                    <h4>Singapore with Bali </h4>
-                </a>
+                <img src="/images/prg1.jpg" class="img-fluid" alt="...">
+                <h4>Singapore with Bali </h4>
             </div>
             <div class="col-sm-6">
                 <img src="/images/p05.jpg" class="img-fluid" alt="...">

@@ -31,15 +31,19 @@ class User extends BaseController
         // field name, error message, validation rules
         $validation->setRule('f_name', 'first name', 'trim|required|min_length[3]');
         $validation->setRule('l_name', 'last name', 'trim|required');
+        $validation->setRule('number', 'phone', 'trim|required|numeric|min_length[10]|max_length[10]');
         $validation->setRule('email', 'email', 'trim|required|valid_email');
         $validation->setRule('password', 'password', 'trim|required|min_length[6]|max_length[32]');
         $validation->setRule('cpassword', 'confirm password', 'trim|required|min_length[6]|matches[password]');
-        $validation->setRule('phone', 'phone', 'trim|required|numeric|min_length[10]|max_length[10]');
         $validation->setRule('trav_id', 'Referral id', 'required');
 
-        if (FALSE) {
+        if (!$validation->run($_POST)) {
             $errors = $validation->getErrors();
-            echo json_encode($errors);
+            $value = empty($errors) ?"" : reset($errors);
+            $data = array("status" => "error", "message" => $value);
+            header("Content-Type: application/json");
+            echo json_encode($data);
+            exit();
         } else {
             $user_model = model('UserModel');
             $session = session();
