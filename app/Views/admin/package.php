@@ -6,9 +6,9 @@ $amount_with_tax = $package["total"] + ($package["total"] * 0.05) + ($package["t
     <div id="content_box">
         <p>
             <span class="heading_1"><?php echo $package["name"]; ?></span><br>
-            <span id="package_locations">Singapore, Malaysia</span>
+            <span id="package_locations"><?php echo $package["locations"]; ?></span>
             <br>
-            <span id="package_days">7 Nights 3 Days</span>
+            <span id="package_days"><?php echo $package["nights"]." ".$package["days"]; ?></span>
         </p>
         <br>
         <p>
