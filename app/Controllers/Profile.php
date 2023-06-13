@@ -351,8 +351,11 @@ class Profile extends BaseController
             $payment_type = $this->request->getPost('payment_type');
             $package_data = $user_model->get_package_data($package_id);
             $package = $package_data[0];
-            $package_amount_with_tax = $package["total"] + ($package["total"] * 0.05) + ($package["total"] * 0.05);
-
+            if ($package["name"] == "Goa") {
+                $package_amount_with_tax = $package["total"] + ($package["total"] * 0.05);
+            }else{
+                $package_amount_with_tax = $package["total"] + ($package["total"] * 0.05) + ($package["total"] * 0.05);
+            }
             //Add packages to user in purchase table
             for ($i = 1; $i <= $booking_packages_number; $i++) {
                 $add_purchase_data = [
@@ -496,6 +499,11 @@ class Profile extends BaseController
             $package_id = $data['package_information'][0]['package_id'];
             $data['package_data'] = $user_model->get_package_data($package_id);
             $data['payment_amount'] = $user_model->get_payment_amount($id);
+            $db = db_connect();
+            $query   = $db->query('select booking_packages_number from customer where customer_id = "' . $customer_id . '"');
+            $result = $query->getRowArray();
+            $booking_packages_number = $result['booking_packages_number'];
+            $data['booking_packages_number'] = $booking_packages_number;
         }
 
         $data['main_content'] = 'admin/package_selected_successfully';

@@ -118,7 +118,7 @@ if (empty($_GET["plan"])) {
                     <input type="hidden" name="booking_packages_number" value="<?php echo $booking_packages_number; ?>">
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">I agree to all terms and conditions.</label>
+                        <label class="form-check-label" for="exampleCheck1">I agree to all <a href="/terms_of_use">terms and conditions.</a></label>
                     </div>
                     <button type="submit" class="btn btn-danger w-100 btn-lg">Sign Up</button>
                 </form>
