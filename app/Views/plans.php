@@ -4,7 +4,7 @@
         cursor: pointer;
     }
 </style>
-<div class="row container g-0 m-auto" style="display:flex; justify-content:center; align-items:center;">
+<div class="row container g-0" style="margin:auto;display:flex; justify-content:center; align-items:center;">
     <div class="col">
         <img class="img-fluid" src="/images/features.jpg" alt="">
     </div>
