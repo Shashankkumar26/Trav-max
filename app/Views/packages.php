@@ -14,16 +14,16 @@
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <img src="/images/p02.jpg" class="img-fluid" alt="...">
+                <img src="/images/phuket krabi 3.jpg" class="img-fluid" alt="...">
                 <h4>Phuket with Krabi</h4>
             </div>
             <div class="col-sm-6">
-                <img src="/images/p04.jpg" class="img-fluid" alt="...">
+                <img src="/images/maldives experience.jpg" class="img-fluid" alt="...">
                 <h4>Magical Maldives </h4>
                 </a>
             </div>
             <div class="col-sm-6">
-                    <img src="/images/p03.jpg" class="img-fluid" alt="...">
+                    <img src="/images/Dubai 4.jpg" class="img-fluid" alt="...">
                     <h4>Exciting Dubai </h4>
             </div>
             <div class="col-sm-6">

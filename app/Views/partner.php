@@ -62,7 +62,7 @@
     <div class="container">
         <div class="classs06">
             <div class="divvv09">
-                <img src="images/new_plans.jpeg" class="img-fluid" alt="...">
+                <img src="images/Pricing Plans 4.jpg" class="img-fluid" alt="...">
             </div>
         </div>
     </div>
