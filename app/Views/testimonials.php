@@ -167,11 +167,11 @@
                     </div>
                     <div class="col-sm-4">
                         <img src="/images/test20.jpg" class="img-fluid" alt="...">
-                        <h4>Akanksha</h4>
+                        <h4>Shashank</h4>
                         <span>
                             I have to admit, I'm a picky customer. I<br>
                             came across this and was skeptical. I<br>
-                            did'nt believe but could feel the<br>
+                            didn't believe but could feel the<br>
                             potential if any of it is true and real.<br>
                             I am so glad that i gave it a try and am<br>
                             now fully into it.

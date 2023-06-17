@@ -20,7 +20,10 @@
             <div class="col-sm-6">
                 <img src="/images/maldives experience.jpg" class="img-fluid" alt="...">
                 <h4>Magical Maldives </h4>
-                </a>
+            </div>
+            <div class="col-sm-6">
+                <img src="/images/Asia Tour 2.jpg" class="img-fluid" alt="...">
+                <h4>Asia Tours </h4>
             </div>
             <div class="col-sm-6">
                     <img src="/images/Dubai 4.jpg" class="img-fluid" alt="...">
@@ -67,8 +70,8 @@
                 <h4>South Korea Special </h4>
             </div>
             <div class="col-sm-6">
-                <img src="/images/France1.jpg" class="img-fluid" alt="...">
-                <h4>Switzerland with France </h4>
+                <img src="/images/Swiss and Paris.jpg" class="img-fluid" alt="...">
+                <h4>Switzerland with Paris </h4>
             </div>
             <div class="col-sm-6">
                 <img src="/images/Australia1.jpg" class="img-fluid" alt="...">
@@ -83,8 +86,16 @@
                 <h4>Canada Exclusive </h4>
             </div>
             <div class="col-sm-6">
-                <img src="/images/Magical1.jpg" class="img-fluid" alt="...">
-                <h4>Magical New Zealand </h4>
+                <img src="/images/Canada And USA 1.jpeg" class="img-fluid" alt="...">
+                <h4>Canada and USA </h4>
+            </div>
+            <div class="col-sm-6">
+                <img src="/images/Kerala goa.jpeg" class="img-fluid" alt="...">
+                <h4>Explore India </h4>
+            </div>
+            <div class="col-sm-6">
+                <img src="/images/Udaipur and Manali.jpeg" class="img-fluid" alt="...">
+                <h4>Explore India </h4>
             </div>
         </div>
     </div>

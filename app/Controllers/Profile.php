@@ -215,7 +215,7 @@ class Profile extends BaseController
     public function package()
     {
         $user_model = model('UserModel');
-        $data['css'] = '/css/package.css';
+        $data['css'] = '/css/';
         $data['js'] = '/js/package.js';
 
         $id = session()->get('cust_id');

@@ -93,7 +93,7 @@
         <a class="fist-c" href="" data-toggle="modal" data-target="#registerLoginModal">Be a Partner - Register Now</a>
     </div>
     <div class="divvv16">
-        <span>Go to Home Page</span>
+        <span ><a href="/">Go to Home Page</a></span>
     </div>
 
 </section>
